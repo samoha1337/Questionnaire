@@ -6,11 +6,11 @@ MainWindow::MainWindow(QWidget *parent)
 //конструктор
 {
     ui->setupUi(this);
-    SetQuestion();
+
     setWindowTitle("Questionnaire");
     timer = new QTimer(this);//выделяем память для таймера
     timer->setInterval(100);
-    connect(timer,SIGNAL(timeout()),this,SLOT(Timeotvet()));//соединяем таймер       
+    connect(timer,SIGNAL(timeout()),this,SLOT(Timeotvet()));//соединяем таймер
     setWindowIcon(QIcon("C:/Qt/project/project_2-2/confused.ico"));//Установка иконки приложения
     for (int i=0; i<5; i++)
     {
@@ -19,8 +19,11 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton_back->hide();
     ui->tableWidget->hide();
     ui->pushButton_repeat->hide();
-
-    timer->start(10);
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    ui->pushButton_3->hide();
+    ui->pushButton_4->hide();
+    ui->pushButton_5->hide();
 }
 //деструктор
 MainWindow::~MainWindow()
@@ -29,7 +32,7 @@ MainWindow::~MainWindow()
 }
 //таймер для подчсета времени ответа
 void MainWindow::Timeotvet()
-{
+{    
     counter--;
     QTime time = QTime::fromMSecsSinceStartOfDay(counter*10);
     QString text = time.toString("mm:ss.zzz");//создаем маску для вывода чисел
@@ -69,20 +72,16 @@ void MainWindow::on_pushButton_2_clicked()
 
     question_index++;
     SetQuestion();
-
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_3_clicked()
 {
-
     if (question_index==3)
     {
         ans[2]="Верно";
     }
-
     question_index++;
     SetQuestion();
-
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_4_clicked()
@@ -91,10 +90,8 @@ void MainWindow::on_pushButton_4_clicked()
     {
         ans[3]="Верно";
     }
-
     question_index++;
     SetQuestion();
-
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_5_clicked()
@@ -169,6 +166,7 @@ void MainWindow::SetQuestion()
     settime(4);
     if (question_index>5)
     {
+
         ui->tableWidget->show();
         ui->pushButton->hide();
         ui->pushButton_2->hide();
@@ -179,6 +177,8 @@ void MainWindow::SetQuestion()
         ui->label->hide();
         ui->pushButton_repeat->show();
         timer->stop();
+
+
         for (int i=0;i<5; i++)//запрещаем изменение ячеек
         {
             QTableWidgetItem * new_item; //создаем указатель на ячейку
@@ -210,17 +210,19 @@ void MainWindow::on_pushButton_repeat_clicked()
     {
         ans[i]="Неверно";
     }
-    ui->pushButton->show();
-    ui->pushButton_2->show();
-    ui->pushButton_3->show();
-    ui->pushButton_4->show();
-    ui->pushButton_5->show();
-    ui->pushButton_back->show();
-    ui->label->show();    
-
+    ui->pushButton->hide();
+    ui->pushButton_2->hide();
+    ui->pushButton_3->hide();
+    ui->pushButton_4->hide();
+    ui->pushButton_5->hide();
+    ui->pushButton_easy->show();
+    ui->pushButton_middle->show();
+    ui->pushButton_hard->show();
+    ui->pushButton_back->hide();
+    ui->label->hide();
     ui->tableWidget->hide();
     timer->start();
-    counter=6000;
+    counter=0;
     ui->pushButton_repeat->hide();
     SetQuestion();
     ui->pushButton_back->hide();
@@ -234,3 +236,64 @@ void MainWindow::settime(int k)
     item->setFlags(item->flags() & 0xfffffffd);//запрещаем редактирование ячейки
     ui->tableWidget->setItem(k,1,item);
 }
+
+void MainWindow::on_pushButton_easy_clicked()
+{
+    ui->pushButton_easy->hide();
+    ui->pushButton_middle->hide();
+    ui->pushButton_hard->hide();
+    ui->label->show();
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->show();
+    ui->pushButton_4->show();
+    ui->pushButton_5->show();
+    counter = 12000;
+    SetQuestion();
+    timer->start(10);
+    //best_time();
+}
+
+void MainWindow::on_pushButton_middle_clicked()
+{
+    ui->pushButton_easy->hide();
+    ui->pushButton_middle->hide();
+    ui->pushButton_hard->hide();
+    ui->label->show();
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->show();
+    ui->pushButton_4->show();
+    ui->pushButton_5->show();
+    counter = 6000;
+    SetQuestion();
+    timer->start(10);
+    //best_time();
+}
+
+void MainWindow::on_pushButton_hard_clicked()
+{
+    ui->pushButton_easy->hide();
+    ui->pushButton_middle->hide();
+    ui->pushButton_hard->hide();
+    ui->label->show();
+    ui->pushButton->show();
+    ui->pushButton_2->show();
+    ui->pushButton_3->show();
+    ui->pushButton_4->show();
+    ui->pushButton_5->show();
+    counter = 3000;
+    SetQuestion();
+    timer->start(10);
+    //best_time();
+}
+
+//void MainWindow::best_time()
+//{
+//    QTime star;
+//    QTime Time = QTime::currentTime();
+//    int blabla = star.msecsTo(Time);
+//    /*QString text = blabla.toString("mm:ss.zzz");*///создаем маску для вывода чисел
+//    ui->label_2->setText(QString::number(blabla));
+//}
+

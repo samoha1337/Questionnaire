@@ -40,13 +40,23 @@ private slots:
     void on_pushButton_repeat_clicked();//повторить опрос
 
     void settime(int k);
+
+    void on_pushButton_easy_clicked();
+
+    void on_pushButton_middle_clicked();
+
+    void on_pushButton_hard_clicked();
+
+    //void best_time();
+
 private:
     Ui::MainWindow *ui;
     QTime *timer_ans;//создаем таймер для скорости ответа
     QTimer *timer;//таймер
-    int counter = 6000;
+    int counter;
     QString ans[5];
     int question_index=1;
     QTime tablemas[5];
+
 };
 #endif // MAINWINDOW_H
