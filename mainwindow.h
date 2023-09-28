@@ -8,6 +8,9 @@
 #include <QString>
 #include <QElapsedTimer>
 #include <QPushButton>
+#include <QLayout>
+
+#include <QRandomGenerator>
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -39,15 +42,17 @@ private slots:
 
     void on_pushButton_repeat_clicked();//повторить опрос
 
-    void settime(int k);
+    void settime(int k);//функция для вывода времени в таблицу
 
-    void on_pushButton_easy_clicked();
+    void on_pushButton_easy_clicked();//кнопка выбора сложности(легкий)
 
-    void on_pushButton_middle_clicked();
+    void on_pushButton_middle_clicked();//кнопка выбора сложности (средний)
 
-    void on_pushButton_hard_clicked();
+    void on_pushButton_hard_clicked();//кнопка выбора сложности (тяжелый)
 
     //void best_time();
+
+    void randomButton(QLayout *layout);
 
 private:
     Ui::MainWindow *ui;

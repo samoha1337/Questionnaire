@@ -7,7 +7,10 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-    setWindowTitle("Questionnaire");
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
+
+    setWindowTitle("Questionnaire");//установка названия прогрммы
     timer = new QTimer(this);//выделяем память для таймера
     timer->setInterval(100);
     connect(timer,SIGNAL(timeout()),this,SLOT(Timeotvet()));//соединяем таймер
@@ -34,7 +37,7 @@ MainWindow::~MainWindow()
 void MainWindow::Timeotvet()
 {    
     counter--;
-    QTime time = QTime::fromMSecsSinceStartOfDay(counter*10);
+    QTime time = QTime::fromMSecsSinceStartOfDay(counter*10);//перевод времени
     QString text = time.toString("mm:ss.zzz");//создаем маску для вывода чисел
     ui->lcdNumber->display(text);//выводим
     if (counter==0)
@@ -61,6 +64,8 @@ void MainWindow::on_pushButton_clicked()
 
     question_index++;
     SetQuestion();
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_2_clicked()
@@ -72,6 +77,8 @@ void MainWindow::on_pushButton_2_clicked()
 
     question_index++;
     SetQuestion();
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_3_clicked()
@@ -82,6 +89,8 @@ void MainWindow::on_pushButton_3_clicked()
     }
     question_index++;
     SetQuestion();
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_4_clicked()
@@ -92,6 +101,8 @@ void MainWindow::on_pushButton_4_clicked()
     }
     question_index++;
     SetQuestion();
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
 }
 //клик на вариант ответа
 void MainWindow::on_pushButton_5_clicked()
@@ -103,6 +114,8 @@ void MainWindow::on_pushButton_5_clicked()
 
     question_index++;
     SetQuestion();
+    QLayout* layout = ui->verticalLayout;
+    randomButton(layout);
 }
 //устанавливает вопрос в зависимости от индекса
 void MainWindow::SetQuestion()
@@ -184,8 +197,8 @@ void MainWindow::SetQuestion()
             QTableWidgetItem * new_item; //создаем указатель на ячейку
             new_item = new QTableWidgetItem; //выделяем память
             new_item->setFlags(new_item->flags() & 0xfffffffd);//запрещаем редактирование ячейки
-            new_item->setText(ans[i]);     
-            ui->tableWidget->setItem(i,0,new_item);
+            new_item->setText(ans[i]);//устанавливаем ответ
+            ui->tableWidget->setItem(i,0,new_item);//в какую ячейку устанавливаем
         }
      }
      else
@@ -198,13 +211,17 @@ void MainWindow::SetQuestion()
         ui->pushButton_5->setText(p5);
      }
 }
+//кнопка для возврата к предыдущему вопросу
 void MainWindow::on_pushButton_back_clicked()
 {
     question_index--;
     SetQuestion();
 }
+//кнопка заново
 void MainWindow::on_pushButton_repeat_clicked()
 {    
+    //QLayout* layout = ui->verticalLayout;
+    //randomButton(layout);
     question_index=1;
     for (int i=0; i<5; i++)
     {
@@ -227,16 +244,16 @@ void MainWindow::on_pushButton_repeat_clicked()
     SetQuestion();
     ui->pushButton_back->hide();
 }
-
+//функция для вывода времени ответа на вопрос в таблицу
 void MainWindow::settime(int k)
 {
     QTime elapsedTime = QTime::fromMSecsSinceStartOfDay(timer_ans->elapsed());//времени прошло с выбора ответа
     QString text = elapsedTime.toString("mm:ss.zzz");//создаем маску для вывода чисел
-    QTableWidgetItem *item = new QTableWidgetItem(text);
+    QTableWidgetItem *item = new QTableWidgetItem(text);//выделяем память
     item->setFlags(item->flags() & 0xfffffffd);//запрещаем редактирование ячейки
-    ui->tableWidget->setItem(k,1,item);
+    ui->tableWidget->setItem(k,1,item);//вносим ячейку таблицы
 }
-
+//кнопка выбора сложности (легкий)
 void MainWindow::on_pushButton_easy_clicked()
 {
     ui->pushButton_easy->hide();
@@ -253,7 +270,7 @@ void MainWindow::on_pushButton_easy_clicked()
     timer->start(10);
     //best_time();
 }
-
+//кнопка выбора сложности (средний)
 void MainWindow::on_pushButton_middle_clicked()
 {
     ui->pushButton_easy->hide();
@@ -270,7 +287,7 @@ void MainWindow::on_pushButton_middle_clicked()
     timer->start(10);
     //best_time();
 }
-
+//кнопка выбора сложности (тяжелый)
 void MainWindow::on_pushButton_hard_clicked()
 {
     ui->pushButton_easy->hide();
@@ -288,6 +305,43 @@ void MainWindow::on_pushButton_hard_clicked()
     //best_time();
 }
 
+void MainWindow::randomButton(QLayout *layout)
+{
+    // Создание списка виджетов из макета
+        QList<QWidget*> widgets;
+        for (int i = 0; i < layout->count(); i++)
+        {
+            QWidget* widget = layout->itemAt(i)->widget();
+            if (widget)
+            {
+                widgets.append(widget);
+            }
+        }
+
+        // Перемешивание списка виджетов
+        int n = widgets.size();
+        for (int i = 0; i < n - 1; i++)
+        {
+            int j = QRandomGenerator::global()->bounded(n - i);
+            if (i != j)
+            {
+                QWidget* temp = widgets[i];
+                widgets[i] = widgets[j];
+                widgets[j] = temp;
+            }
+        }
+
+        // Удаление виджетов из макета
+        while (QLayoutItem* item = layout->takeAt(0))
+        {
+            delete item;
+        }
+        // Добавление виджетов вновь в макет в случайном порядке
+        foreach (QWidget* widget, widgets)
+        {
+            layout->addWidget(widget);
+        }
+}
 //void MainWindow::best_time()
 //{
 //    QTime star;
@@ -296,4 +350,3 @@ void MainWindow::on_pushButton_hard_clicked()
 //    /*QString text = blabla.toString("mm:ss.zzz");*///создаем маску для вывода чисел
 //    ui->label_2->setText(QString::number(blabla));
 //}
-

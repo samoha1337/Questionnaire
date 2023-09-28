@@ -39,24 +39,12 @@
     <property name="geometry">
      <rect>
       <x>90</x>
-      <y>70</y>
+      <y>205</y>
       <width>641</width>
-      <height>516</height>
+      <height>381</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
-     <item>
-      <widget class="QLabel" name="label">
-       <property name="font">
-        <font>
-         <pointsize>10</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-      </widget>
-     </item>
      <item>
       <widget class="QPushButton" name="pushButton">
        <property name="minimumSize">
@@ -228,7 +216,6 @@ selection-background-color: rgb(255, 0, 0);</string>
       </widget>
      </item>
     </layout>
-    <zorder>label</zorder>
     <zorder>pushButton</zorder>
     <zorder>pushButton_2</zorder>
     <zorder>pushButton_3</zorder>
@@ -433,17 +420,22 @@ selection-background-color: rgb(255, 0, 0);</string>
      <string>СЛОЖНЫЙ УРОВЕНЬ</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>680</y>
-      <width>371</width>
-      <height>41</height>
+      <x>70</x>
+      <y>70</y>
+      <width>639</width>
+      <height>71</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
+    </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
   </widget>
