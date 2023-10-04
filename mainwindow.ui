@@ -41,12 +41,12 @@
       <x>90</x>
       <y>205</y>
       <width>641</width>
-      <height>381</height>
+      <height>438</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_question">
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="pushButton_1">
        <property name="minimumSize">
         <size>
          <width>30</width>
@@ -216,7 +216,7 @@ selection-background-color: rgb(255, 0, 0);</string>
       </widget>
      </item>
     </layout>
-    <zorder>pushButton</zorder>
+    <zorder>pushButton_1</zorder>
     <zorder>pushButton_2</zorder>
     <zorder>pushButton_3</zorder>
     <zorder>pushButton_5</zorder>
@@ -226,8 +226,8 @@ selection-background-color: rgb(255, 0, 0);</string>
    <widget class="QPushButton" name="pushButton_back">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>590</y>
+      <x>90</x>
+      <y>650</y>
       <width>91</width>
       <height>61</height>
      </rect>
@@ -327,8 +327,8 @@ selection-background-color: rgb(255, 0, 0);</string>
    <widget class="QPushButton" name="pushButton_repeat">
     <property name="geometry">
      <rect>
-      <x>580</x>
-      <y>590</y>
+      <x>590</x>
+      <y>650</y>
       <width>141</width>
       <height>61</height>
      </rect>
@@ -420,7 +420,7 @@ selection-background-color: rgb(255, 0, 0);</string>
      <string>СЛОЖНЫЙ УРОВЕНЬ</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="label_question">
     <property name="geometry">
      <rect>
       <x>70</x>

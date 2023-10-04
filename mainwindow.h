@@ -9,6 +9,7 @@
 #include <QElapsedTimer>
 #include <QPushButton>
 #include <QLayout>
+#include <QDebug>
 
 #include <QRandomGenerator>
 QT_BEGIN_NAMESPACE
@@ -23,8 +24,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
-    void on_pushButton_clicked();//1 вариант ответа
 
     void on_pushButton_2_clicked();//2 вариант ответа
 
@@ -48,20 +49,26 @@ private slots:
 
     void on_pushButton_middle_clicked();//кнопка выбора сложности (средний)
 
-    void on_pushButton_hard_clicked();//кнопка выбора сложности (тяжелый)
-
-    //void best_time();
+    void on_pushButton_hard_clicked();//кнопка выбора сложности (тяжелый)    
 
     void randomButton(QLayout *layout);
 
+    void on_pushButton_1_clicked();//1 вариант ответа
+
+    void show_bt();
+
+    void hide_bt();
+
 private:
-    Ui::MainWindow *ui;
+    Ui::MainWindow *ui;   
     QTime *timer_ans;//создаем таймер для скорости ответа
     QTimer *timer;//таймер
-    int counter;
-    QString ans[5];
-    int question_index=1;
-    QTime tablemas[5];
+    int counter;//счетчик
+    QString ans[5];//массив ответов
+    int question_index=1;//индекс ответов
+    QTime tablemas[5];//массив времени
+
+
 
 };
 #endif // MAINWINDOW_H
